@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B站侠 - 本地音视频合并工具</title>
+<meta name="description" content="B站侠是一个简单易用的本地音视频合并工具，基于 FFmpeg 构建，所有处理都在本地完成。">
+<link rel="icon" type="image/png" href="icon.png">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --primary: #3F51B5;
+    --primary-dark: #303F9F;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --bg: #fafafa;
+    --card: #ffffff;
+    --border: #e5e5e5;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+                 sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  header {
+    text-align: center;
+    padding: 64px 0 40px;
+  }
+
+  .app-icon {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+    box-shadow: 0 8px 24px rgba(63, 81, 181, 0.25);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+
+  .tagline {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+ 
+  .btn-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(63, 81, 181, 0.3);
+  }
+
+  .btn-secondary {
+    background: white;
+    color: var(--primary);
+    border-color: var(--border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  .version-tag {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: #f0f0f0;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 8px;
+  }
+
+  section {
+    margin-bottom: 48px;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .feature {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .feature:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+    border-color: var(--primary);
+  }
+
+  .feature-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .feature-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .feature-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .steps {
+    list-style: none;
+    counter-reset: step;
+  }
+
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 14px 0 14px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .steps li:last-child { border-bottom: none; }
+
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 0 60px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  footer a:hover { text-decoration: underline; }
+
+  .license-note {
+    font-size: 12px;
+    margin-top: 12px;
+    color: #999
+    }
+   
+.shots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.shot {
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+  background: white;
+  text-decoration: none;
+  color: inherit;
+}
+
+.shot:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(63, 81, 181, 0.18);
+  border-color: var(--primary);
+}
+
+.shot img {
+  width: 100%;
+  display: block;
+}
+
+.shot-caption {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 8px 0;
+}
+
+  @media (max-width: 480px) {
+    header { padding: 48px 0 32px; }
+    h1 { font-size: 26px; }
+    .app-icon { width: 80px; height: 80px; }
+  }
+</style>
+</head>
+<body><div class="lang-switch">
+  <a href="index.html" class="active">中文</a>
+  <a href="en.html">EN</a>
+</div>
+
+<div class="container">
+
+  <header>
+    <img src="icon.png" alt="B站侠图标" class="app-icon">
+    <h1>B站侠</h1>
+    <p class="tagline">简单易用的本地音视频合并工具</p>
+
+    <div class="btn-group">
+      <a href="https://github.com/misaknetwork/BiliXia/releases/latest" class="btn btn-primary">
+        ⬇ 下载最新版
+      </a>
+      <a href="https://github.com/misaknetwork/BiliXia" class="btn btn-secondary">
+        📦 查看源码
+      </a>
+    </div>
+    <span class="version-tag">v1.5 · Android 7.0+</span>
+  </header>
+
+  <section>
+    <h2>✨ 功能特性</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🎞</div>
+        <div class="feature-title">音视频合并</div>
+        <div class="feature-desc">把任意视频与音频轨道合并为 MP4</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚀</div>
+        <div class="feature-title">极速处理</div>
+        <div class="feature-desc">视频流直接复制，不重新编码，速度极快</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-title">完全本地</div>
+        <div class="feature-desc">所有处理在设备上完成，不上传任何文件</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🕒</div>
+        <div class="feature-title">时间戳命名</div>
+        <div class="feature-desc">每次输出独立文件名，永不覆盖历史</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📱</div>
+        <div class="feature-title">相册集成</div>
+        <div class="feature-desc">合并完成后自动出现在相册中</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔄</div>
+        <div class="feature-title">自动更新</div>
+        <div class="feature-desc">内置更新检查，第一时间获得新版本</div>
+      </div>
+    </div>
+  </section>
+  <section>
+  <h2>📸 应用截图</h2>
+  <div class="shots">
+    <a href="screenshots/main.png" target="_blank" class="shot">
+      <img src="screenshots/main.png" alt="主界面">
+      <div class="shot-caption">主界面</div>
+    </a>
+    <a href="screenshots/merging.png" target="_blank" class="shot">
+      <img src="screenshots/merging.png" alt="合并中">
+      <div class="shot-caption">合并中</div>
+    </a>
+    <a href="screenshots/about.png" target="_blank" class="shot">
+      <img src="screenshots/about.png" alt="关于页面">
+      <div class="shot-caption">关于页面</div>
+    </a>
+  </div>
+</section>
+
+  <section>
+    <h2>📖 使用步骤</h2>
+    <ol class="steps">
+      <li>打开 B站侠，点击<strong>选择视频</strong>，从系统中挑选视频</li>
+      <li>点击<strong>选择音频</strong>，挑选要叠加的音频文件</li>
+      <li>点击<strong>开始合并</strong>，等待进度条走完</li>
+      <li>完成后在相册中查看，或前往 <code>Movies/BXia/</code> 目录</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>🛠 技术栈</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-title">Java</div>
+        <div class="feature-desc">全部业务逻辑</div>
+      </div>
+      <div class="feature">
+        <div class="feature-title">FFmpegKit</div>
+        <div class="feature-desc">音视频合并核心</div>
+      </div>
+      <div class="feature">
+        <div class="feature-title">GitHub Actions</div>
+        <div class="feature-desc">自动化构建与发布</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      Made with ❤️ by <a href="https://github.com/misaknetwork">MisakNetwork</a>
+    </p>
+    <p class="license-note">
+      Licensed under <a href="https://www.gnu.org/licenses/agpl-3.0.html">AGPL-3.0</a>
+    </p>
+  </footer>
+
+</div>
+
+</body>
+</html>
