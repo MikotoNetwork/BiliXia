@@ -178,24 +178,24 @@ AGPL-3.0 与 GPLv3 兼容，因此本项目满足这一要求。任何 fork 或�
 
 欢迎提交 Issue 和 Pull Request！
 
-· Bug 反馈：请附上设备型号、Android 版本、复现步骤和完整日志
-· 功能建议：先开 Issue 讨论，避免无效 PR
+· Bug 反馈：请附上设备型号、Android 版本、复现步骤和完整日志<br>
+· 功能建议：先开 Issue 讨论，避免无效 PR<br>
 · Pull Request：请保持代码风格一致，并在描述里说明改动
 
 ---
 
 ## 🙏 致谢
 
-· FFmpegKit —— 强大的 FFmpeg 安卓封装
-· FFmpeg —— 音视频处理领域的事实标准
+· FFmpegKit —— 强大的 FFmpeg 安卓封装<br>
+· FFmpeg —— 音视频处理领域的事实标准<br>
 · 所有为本项目提交过 Issue 和 PR 的朋友
 
 ---
 
 ## 📮 联系
 
-· 作者：MisakNetwork
-· 项目主页：https://github.com/MikotoNetwork/BiliXia/
+· 作者：MisakNetwork<br>
+· 项目主页：https://github.com/MikotoNetwork/BiliXia/ <br>
 · 问题反馈：https://github.com/MikotoNetwork/BiliXia/issues
 
 ---
