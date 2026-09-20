@@ -2,7 +2,7 @@
 
 > 🎬 一个简单易用的本地音视频合并工具，基于 FFmpeg 构建。
 
-[![Build APK](https://github.com/misaknetwork/BiliXia/actions/workflows/build.yml/badge.svg)](https://github.com/misaknetwork/BiliXia/actions/workflows/build.yml)
+[![Build APK](https://github.com/MikotoNetwork/BiliXia/actions/workflows/build.yml/badge.svg)](https://github.com/MikotoNetwork/BiliXia/actions/workflows/build.yml)
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Android-green.svg)](https://www.android.com/)
 [![Min SDK](https://img.shields.io/badge/Min%20SDK-24-orange.svg)](https://developer.android.com/)
@@ -35,7 +35,7 @@ B站侠是一个轻量的 Android 应用，用于把**独立的视频文件和�
 
 ## 📥 下载安装
 
-前往 [Releases 页面](https://github.com/misaknetwork/BiliXia/releases) 下载最新版 APK 安装即可。
+前往 [Releases 页面](https://github.com/MikotoNetwork/BiliXia//releases) 下载最新版 APK 安装即可。
 
 **系统要求：**
 
@@ -71,7 +71,7 @@ Android/data/top.misaknetwork.bilixia/files/Movies/BXia/
 
 ```bash
 # 克隆仓库
-git clone https://github.com/misaknetwork/BiliXia.git
+git clone https://github.com/MikotoNetwork/BiliXia/.git
 cd BiliXia
 
 # 编译 Debug 版
@@ -195,8 +195,8 @@ AGPL-3.0 与 GPLv3 兼容，因此本项目满足这一要求。任何 fork 或�
 ## 📮 联系
 
 · 作者：MisakNetwork
-· 项目主页：https://github.com/misaknetwork/BiliXia
-· 问题反馈：https://github.com/misaknetwork/BiliXia/issues
+· 项目主页：https://github.com/MikotoNetwork/BiliXia/
+· 问题反馈：https://github.com/MikotoNetwork/BiliXia/issues
 
 ---
 
