@@ -1,0 +1,44 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'top.misaknetwork.bilixia'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "top.misaknetwork.bilixia"
+        minSdk 26
+        targetSdk 34
+        versionCode 5
+        versionName "1.5"
+        ndk {   
+         abiFilters 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // smart-exception-java
+    implementation 'com.arthenica:smart-exception-java:0.2.1'
+    // androidX
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    // MD
+    implementation 'com.google.android.material:material:1.11.0'
+    // androidX Acticity
+    implementation 'androidx.activity:activity:1.8.2'
+    // ffmpeg-kit-full
+    implementation 'dev.ffmpegkit-maintained:ffmpeg-kit-full:8.1.7'
+}

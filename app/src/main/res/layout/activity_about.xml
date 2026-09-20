@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp">
+
+    
+    <ImageView
+        android:id="@+id/ivAppIcon"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/icon"
+        android:contentDescription="App Icon" />
+
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="B站侠"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#3F51B5" />
+
+    
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="版本 1.0"
+        android:textSize="14sp"
+        android:textColor="#666666" />
+
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="一个简单易用的本地音视频合并工具。\n基于 FFmpeg 构建。"
+        android:textSize="15sp"
+        android:lineSpacingExtra="6dp"
+        android:textColor="#333333" />
+        
+   <Button
+    android:id="@+id/btnCheckUpdate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24dp"
+    android:text="检查更新" />
+    <TextView
+    android:id="@+id/tvLicense"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:text="Licensed under AGPL-3.0"
+    android:textSize="12sp"
+    android:textColor="#999999" />
+
+<TextView
+    android:id="@+id/tvSource"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:text="查看源代码"
+    android:textSize="12sp"
+    android:textColor="#3F51B5"
+    android:padding="4dp" />
+
+    
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Developed by MisakNetwork"
+        android:textSize="12sp"
+        android:textColor="#999999" />
+
+</LinearLayout>
