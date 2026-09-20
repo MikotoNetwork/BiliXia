@@ -90,7 +90,7 @@ cd BiliXia
 ```bash
 # 1. 修改 app/build.gradle 中的 versionCode 和 versionName
 # 2. 提交代码
-git add .
+git add *
 git commit -m "release: v1.1"
 git push
 
@@ -106,9 +106,9 @@ Actions 会自动编译 APK 并挂到 Release 上，App 内的更新检查器会
 ## 🧱 技术栈
 
 组件 说明
-Java 全部业务逻辑
-FFmpegKit (ffmpeg-kit-full) 音视频合并核心
-AndroidX AppCompat、Activity Result API
+Java 全部业务逻辑<br>
+FFmpegKit (ffmpeg-kit-full) 音视频合并核心<br>
+AndroidX AppCompat、Activity Result API<br>
 GitHub Actions 自动化构建与发布
 
 ---
