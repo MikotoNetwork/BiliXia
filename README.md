@@ -5,7 +5,7 @@
 [![Build APK](https://github.com/MikotoNetwork/BiliXia/actions/workflows/build.yml/badge.svg)](https://github.com/MikotoNetwork/BiliXia/actions/workflows/build.yml)
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Android-green.svg)](https://www.android.com/)
-[![Min SDK](https://img.shields.io/badge/Min%20SDK-24-orange.svg)](https://developer.android.com/)
+[![Min SDK](https://img.shields.io/badge/Min%20SDK-26-orange.svg)](https://developer.android.com/)
 
 B站侠是一个轻量的 Android 应用，用于把**独立的视频文件和音频文件**合并成一个完整的 MP4。所有处理都在本地完成，**不上传任何文件到服务器**，保护你的隐私。
 
@@ -39,7 +39,7 @@ B站侠是一个轻量的 Android 应用，用于把**独立的视频文件和�
 
 **系统要求：**
 
-- Android 7.0 (API 24) 及以上
+- Android 8.0 (API 26) 及以上
 - 建议使用 arm64-v8a 架构设备
 
 ---
@@ -91,12 +91,12 @@ cd BiliXia
 # 1. 修改 app/build.gradle 中的 versionCode 和 versionName
 # 2. 提交代码
 git add *
-git commit -m "release: v1.1"
+git commit -m "release: v1.5"
 git push
 
 # 3. 打 tag 并推送，会自动触发 Release 工作流
-git tag v1.1
-git push origin v1.1
+git tag v1.5
+git push origin v1.5
 ```
 
 Actions 会自动编译 APK 并挂到 Release 上，App 内的更新检查器会检测到新版本。
