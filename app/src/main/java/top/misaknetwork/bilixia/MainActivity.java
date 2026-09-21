@@ -67,7 +67,13 @@ protected void onCreate(Bundle savedInstanceState) {
      startActivity(new android.content.Intent(MainActivity.this, About.class));
 });
 
+ try{
   new UpdateChecker(this).check(true);  
+ 
+ } catch(Exception e){
+   toast("检测新版本失败！\n请检查网络连接！");
+ }
+  
    
   muxer = new AudioVideoMuxer(this);
 
