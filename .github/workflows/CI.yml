@@ -41,7 +41,7 @@ jobs:
 
       - name: 编译 Debug APK
         env:
-          KEYSTORE_FILE: ${{ runner.home }}/biliXia-release.jks
+          KEYSTORE_FILE: /home/runner/biliXia-release.jks
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
