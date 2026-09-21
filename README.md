@@ -209,7 +209,7 @@ AGPL-3.0 与 GPLv3 兼容，因此本项目满足这一要求。任何 fork 或�
 ## 📮 联系
 
 · 作者：MisakNetwork<br>
-· 项目主页：https://github.com/MikotoNetwork/BiliXia/ <br>
+· 项目主页：https://bilixia.misaknetwork.top/ <br>
 · 问题反馈：https://github.com/MikotoNetwork/BiliXia/issues
 
 ---
