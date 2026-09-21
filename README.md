@@ -4,7 +4,7 @@
 
 🌐 [项目主页](https://bilixia.misaknetwork.top/) 
 · 📥 [下载最新版](https://github.com/MikotoNetwork/BiliXia//releases)
-[![CI](https://github.com/misaknetwork/BiliXia/actions/workflows/CI.yml/badge.svg)](https://github.com/misaknetwork/BiliXia/actions/workflows/CI.yml)
+[![CI](https://github.com/MikotoNetwork/BiliXia/actions/workflows/CI.yml/badge.svg)](https://github.com/MikotoNetwork/BiliXia/actions/workflows/CI.yml)
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Android-green.svg)](https://www.android.com/)
 [![Min SDK](https://img.shields.io/badge/Min%20SDK-26-orange.svg)](https://developer.android.com/)
