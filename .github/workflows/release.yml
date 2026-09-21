@@ -43,7 +43,7 @@ jobs:
 
       - name: 编译 Release APK
         env:
-          KEYSTORE_FILE: $HOME/biliXia-release.jks
+          KEYSTORE_FILE: ${{ runner.home }}/biliXia-release.jks
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
