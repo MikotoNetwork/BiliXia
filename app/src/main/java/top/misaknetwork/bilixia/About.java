@@ -47,6 +47,12 @@ findViewById(R.id.tvSource).setOnClickListener(v -> {
 });
 
 
+     findViewById(R.id.tvWeb).setOnClickListener(v -> {
+    startActivity(new Intent(Intent.ACTION_VIEW,
+            Uri.parse("https://bilixia.misaknetwork.top/")));
+});
+
+
         
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("关于");

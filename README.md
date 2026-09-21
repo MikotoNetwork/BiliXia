@@ -2,6 +2,8 @@
 
 > 🎬 一个简单易用的本地音视频合并工具，基于 FFmpeg 构建。
 
+🌐 [项目主页](https://bilixia.misaknetwork.top/) 
+· 📥 [下载最新版](https://github.com/MikotoNetwork/BiliXia//releases)
 [![Build APK](https://github.com/MikotoNetwork/BiliXia/actions/workflows/build.yml/badge.svg)](https://github.com/MikotoNetwork/BiliXia/actions/workflows/build.yml)
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Android-green.svg)](https://www.android.com/)
@@ -191,6 +193,18 @@ AGPL-3.0 与 GPLv3 兼容，因此本项目满足这一要求。任何 fork 或�
 · 所有为本项目提交过 Issue 和 PR 的朋友
 
 ---
+
+## 免责声明
+
+```
+本项目为开源通用工具，
+按 AGPLv3 发布，仅供合法用途。
+使用者必须遵守所有适用法律。
+我们谴责任何非法或滥用行为，
+并与任何未经授权的非法使用无关。
+
+```
+
 
 ## 📮 联系
 

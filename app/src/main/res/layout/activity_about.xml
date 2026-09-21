@@ -69,6 +69,16 @@
     android:textSize="12sp"
     android:textColor="#3F51B5"
     android:padding="4dp" />
+    <TextView
+    android:id="@+id/tvWeb"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:text="软件官网"
+    android:textSize="12sp"
+    android:textColor="#3F51B5"
+    android:padding="4dp" />
+
 
     
     <TextView
