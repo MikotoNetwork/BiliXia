@@ -2,7 +2,7 @@
 
 > 🎬 一个简单易用的本地音视频合并工具，基于 FFmpeg 构建。
 
-🌐 [项目主页](https://bilixia.misaknetwork.top/) 
+🌐 [项目主页](https://bilixia.misaknetwork.top/) <br>
 · 📥 [下载最新版](https://github.com/MikotoNetwork/BiliXia//releases)
 [![CI](https://github.com/MikotoNetwork/BiliXia/actions/workflows/CI.yml/badge.svg)](https://github.com/MikotoNetwork/BiliXia/actions/workflows/CI.yml)
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
@@ -107,7 +107,7 @@ Actions 会自动编译 APK 并挂到 Release 上，App 内的更新检查器会
 
 ## 🧱 技术栈
 
-组件 说明
+#### 组件说明
 Java 全部业务逻辑<br>
 FFmpegKit (ffmpeg-kit-full) 音视频合并核心<br>
 AndroidX AppCompat、Activity Result API<br>
@@ -135,7 +135,7 @@ BiliXia/
 │   │   └── AndroidManifest.xml
 │   └── build.gradle
 ├── .github/workflows/
-│   ├── build.yml                          # 日常编译
+│   ├── CI.yml                          # 日常编译 DeBug版本
 │   └── release.yml                        # 打 tag 时发布 Release
 ├── LICENSE
 └── README.md
@@ -194,7 +194,7 @@ AGPL-3.0 与 GPLv3 兼容，因此本项目满足这一要求。任何 fork 或�
 
 ---
 
-## 免责声明
+## ⚠️免责声明
 
 ```
 本项目为开源通用工具，
