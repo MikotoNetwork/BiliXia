@@ -11,7 +11,7 @@
         android:id="@+id/ivAppIcon"
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@mipmap/icon"
         android:contentDescription="B站侠应用图标" />
 
     
