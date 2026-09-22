@@ -27,12 +27,7 @@ android {
 
     signingConfigs {
     
-    // 彻底堵死APK V1签名
-    enableV1Signing false
-    // 明确开启APK V2签名
-    enableV2Signing true
-    // 明确开启APK V3签名
-    enableV3Signing true
+        
         release {
             def ksPath = System.getenv("KEYSTORE_FILE")
                     ?: "${System.getProperty('user.home')}/biliXia-release.jks"
@@ -40,6 +35,12 @@ android {
             storePassword System.getenv("KEYSTORE_PASSWORD")
             keyAlias System.getenv("KEY_ALIAS")
             keyPassword System.getenv("KEY_PASSWORD")
+            // 彻底堵死APK V1签名
+              enableV1Signing false
+             // 明确开启APK V2签名
+             enableV2Signing true
+            // 明确开启APK V3签名
+              enableV3Signing true
             
             
         }
