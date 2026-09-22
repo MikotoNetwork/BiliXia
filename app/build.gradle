@@ -44,6 +44,14 @@ android {
             
             
         }
+        debug {
+        // 彻底堵死APK V1签名
+         enableV1Signing false
+         // 明确开启APK V2签名
+         enableV2Signing true
+         // 明确开启APK V3签名
+         enableV3Signing true
+        }
     }
 
     buildTypes {
