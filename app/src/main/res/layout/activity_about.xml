@@ -11,8 +11,8 @@
         android:id="@+id/ivAppIcon"
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:src="@drawable/icon"
-        android:contentDescription="App Icon" />
+        android:src="@mipmap/ic_launcher"
+        android:contentDescription="B站侠应用图标" />
 
     
     <TextView
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="版本 1.0"
+        android:text="版本 1.8"
         android:textSize="14sp"
         android:textColor="#666666" />
 
@@ -44,50 +44,47 @@
         android:textSize="15sp"
         android:lineSpacingExtra="6dp"
         android:textColor="#333333" />
-        
-   <Button
-    android:id="@+id/btnCheckUpdate"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="24dp"
-    android:text="检查更新" />
-    <TextView
-    android:id="@+id/tvLicense"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:text="Licensed under AGPL-3.0"
-    android:textSize="12sp"
-    android:textColor="#999999" />
 
-<TextView
-    android:id="@+id/tvSource"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:text="查看源代码"
-    android:textSize="12sp"
-    android:textColor="#3F51B5"
-    android:padding="4dp" />
-    
-    <TextView
-    android:id="@+id/tvWeb"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:text="软件官网"
-    android:textSize="12sp"
-    android:textColor="#3F51B5"
-    android:padding="4dp" />
+   
+    <Button
+        android:id="@+id/btnCheckUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:minHeight="48dp"
+        android:text="检查更新" />
+        
+        <Button
+        android:id="@+id/btnToWeb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:minHeight="48dp"
+        android:text="检查更新" />
 
 
     
     <TextView
         android:id="@+id/tvAuthor"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
         android:text="Developed by MisakNetwork"
+        android:textSize="13sp"
+        android:textColor="#777777"
+        android:contentDescription="开发者 MisakNetwork，点击访问 GitHub 主页"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground" />
+
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Licensed under AGPL-3.0"
         android:textSize="12sp"
         android:textColor="#999999" />
 

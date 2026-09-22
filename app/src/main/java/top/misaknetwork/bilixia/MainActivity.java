@@ -16,6 +16,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 package top.misaknetwork.bilixia;
+
 import android.content.Intent;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -26,67 +27,74 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.File;
-import top.misaknetwork.bilixia.tool.AudioVideoMuxer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import top.misaknetwork.bilixia.tool.AudioVideoMuxer;
 import top.misaknetwork.bilixia.update.UpdateChecker;
-public class MainActivity extends   AppCompatActivity{
+
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "AudioMuxer";
-    
+
     private Uri videoUri;
     private Uri audioUri;
 
     private TextView tvVideo, tvAudio, tvStatus;
     private ProgressBar progressBar;
-    private Button btnMerge;
+    private Button btnMerge, btnAbout;
     private AudioVideoMuxer muxer;
 
-    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
+       
+        tvVideo     = findViewById(R.id.tvVideo);
+        tvAudio     = findViewById(R.id.tvAudio);
+        tvStatus    = findViewById(R.id.tvStatus);
+        progressBar = findViewById(R.id.progressBar);
+        btnMerge    = findViewById(R.id.btnMerge);
+        btnAbout    = findViewById(R.id.btnAbout);
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    tvVideo     = findViewById(R.id.tvVideo);
-    tvAudio     = findViewById(R.id.tvAudio);
-    tvStatus    = findViewById(R.id.tvStatus);
-    progressBar = findViewById(R.id.progressBar);
-    btnMerge    = findViewById(R.id.btnMerge);
+        Button btnPickVideo = findViewById(R.id.btnPickVideo);
+        Button btnPickAudio = findViewById(R.id.btnPickAudio);
 
-    Button btnPickVideo = findViewById(R.id.btnPickVideo);
-    Button btnPickAudio = findViewById(R.id.btnPickAudio);
-    // 点击“关于”跳转
-    findViewById(R.id.tvAbout).setOnClickListener(v -> {
-     startActivity(new android.content.Intent(MainActivity.this, About.class));
-});
+        
+        btnAbout.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, About.class))
+        );
 
- try{
-  new UpdateChecker(this).check(true);  
- 
- } catch(Exception e){
-   toast("检测新版本失败！\n请检查网络连接！");
- }
-  
-   
-  muxer = new AudioVideoMuxer(this);
+        
+        try {
+            new UpdateChecker(this).check(true);
+        } catch (Exception e) {
+            Log.w(TAG, "检查更新失败", e);
+        }
 
-    
-    btnPickVideo.setOnClickListener(v ->
-            videoPicker.launch(new String[]{"video/*"}));
-    btnPickAudio.setOnClickListener(v ->
-            audioPicker.launch(new String[]{"audio/*"}));
-    btnMerge.setOnClickListener(v -> startMerge());
+        
+        muxer = new AudioVideoMuxer(this);
 
-    
-    refreshButton();
-}
+        
+        btnPickVideo.setOnClickListener(v ->
+                videoPicker.launch(new String[]{"video/*"})
+        );
+        btnPickAudio.setOnClickListener(v ->
+                audioPicker.launch(new String[]{"audio/*"})
+        );
+        btnMerge.setOnClickListener(v -> startMerge());
+
+        
+        refreshButton();
+    }
 
     
     private final ActivityResultLauncher<String[]> videoPicker =
@@ -111,90 +119,95 @@ protected void onCreate(Bundle savedInstanceState) {
             });
 
     
- 
-
-
-
-private void startMerge() {
-    if (videoUri == null || audioUri == null) {
-        toast("请先选择视频和音频");
-        return;
-    }
-
-    btnMerge.setEnabled(false);
-    progressBar.setProgress(0);
-    tvStatus.setText("准备中…");
-
-
-File baseDir = getExternalFilesDir(Environment.DIRECTORY_MOVIES);
-if (baseDir == null) baseDir = getFilesDir();
-File outDir = new File(baseDir, "BXia");
-if (!outDir.exists() && !outDir.mkdirs()) {
-    toast("无法创建输出目录");
-    btnMerge.setEnabled(true); 
-    return;
-}
-
-
-String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
-        .format(new Date());
-String fileName = "B站侠_" + timeStamp + ".mp4";
-File outFile = new File(outDir, fileName);
-    muxer.merge(videoUri, audioUri, outFile, new AudioVideoMuxer.Callback() {
-        @Override
-        public void onProgress(int percent) {
-            progressBar.setProgress(percent);
-            tvStatus.setText("处理中… " + percent + "%");
+    private void startMerge() {
+        if (videoUri == null || audioUri == null) {
+            toast("请先选择视频和音频");
+            return;
         }
 
-        @Override
-        public void onSuccess(File output) {
-            btnMerge.setEnabled(true);
-            progressBar.setProgress(100);
-            tvStatus.setText("合并成功：\n" + output.getAbsolutePath());
+        btnMerge.setEnabled(false);
+        progressBar.setProgress(0);
+        tvStatus.setText("准备中…");
+        tvStatus.announceForAccessibility("开始合并");
 
-            MediaScannerConnection.scanFile(
-                    MainActivity.this,
-                    new String[]{output.getAbsolutePath()},
-                    null, null);
-
-            toast("合并完成");
-        }
-
-        @Override
-        public void onError(String message) {
-            btnMerge.setEnabled(true);
-            tvStatus.setText(message);
-            toast("合并失败");
-        }
-    });
-}
         
-        private void toast(String str) {
-         Toast.makeText(this,str,Toast.LENGTH_LONG).show();
-            
-        	
+        File baseDir = getExternalFilesDir(Environment.DIRECTORY_MOVIES);
+        if (baseDir == null) baseDir = getFilesDir();
+        File outDir = new File(baseDir, "BXia");
+        if (!outDir.exists() && !outDir.mkdirs()) {
+            toast("无法创建输出目录");
+            btnMerge.setEnabled(true);
+            return;
         }
+
+        
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
+                .format(new Date());
+        String fileName = "B站侠_" + timeStamp + ".mp4";
+        File outFile = new File(outDir, fileName);
+
+        
+        muxer.merge(videoUri, audioUri, outFile, new AudioVideoMuxer.Callback() {
+            @Override
+            public void onProgress(int percent) {
+                // 进行无障碍处理
+                progressBar.setProgress(percent);
+                tvStatus.setText("处理中… " + percent + "%");
+                // 每 10% 播报一次，避免刷屏
+                if (percent % 10 == 0) {
+                    tvStatus.announceForAccessibility("合并进度 " + percent + "%");
+                }
+            }
+
+            @Override
+            public void onSuccess(File output) {
+                btnMerge.setEnabled(true);
+                progressBar.setProgress(100);
+                tvStatus.setText("合并成功：\n" + output.getAbsolutePath());
+                tvStatus.announceForAccessibility("合并完成，视频已保存到相册");
+
+                MediaScannerConnection.scanFile(
+                        MainActivity.this,
+                        new String[]{output.getAbsolutePath()},
+                        null, null);
+
+                toast("合并完成");
+            }
+
+            @Override
+            public void onError(String message) {
+                btnMerge.setEnabled(true);
+                tvStatus.setText(message);
+                tvStatus.announceForAccessibility("合并失败：" + message);
+                toast("合并失败");
+            }
+        });
+    }
+
     
-    
+
+    private void toast(String str) {
+        Toast.makeText(this, str, Toast.LENGTH_LONG).show();
+    }
+
     private void takePermission(Uri uri) {
-    try {
-        getContentResolver().takePersistableUriPermission(
-                uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-    } catch (Exception e) {
-        Log.w(TAG, "takePersistableUriPermission failed: " + e.getMessage());
+        try {
+            getContentResolver().takePersistableUriPermission(
+                    uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        } catch (Exception e) {
+            Log.w(TAG, "takePersistableUriPermission failed: " + e.getMessage());
+        }
     }
-}
 
-private void refreshButton() {
-    btnMerge.setEnabled(videoUri != null && audioUri != null);
-}
-
-@Override
-protected void onDestroy() {
-    super.onDestroy();
-    if (muxer != null) {
-        muxer.release();
+    private void refreshButton() {
+        btnMerge.setEnabled(videoUri != null && audioUri != null);
     }
-}
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (muxer != null) {
+            muxer.release();
+        }
+    }
 }

@@ -64,7 +64,7 @@ public class UpdateChecker {
         this.ctx = ctx.getApplicationContext();
     }
 
-    /** 检查更新；silentIfNoUpdate = true 时“已是最新”不弹 Toast */
+    
     public void check(boolean silentIfNoUpdate) {
         if (!running.compareAndSet(false, true)) return;
         executor.execute(() -> {

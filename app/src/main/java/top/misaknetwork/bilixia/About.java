@@ -6,57 +6,34 @@
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 package top.misaknetwork.bilixia;
 
-import android.os.Bundle;
-import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import top.misaknetwork.bilixia.update.UpdateChecker;
 
 public class About extends AppCompatActivity {
+  private Button btnToWeb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        
-           
-               
-     TextView tvAuthor = findViewById(R.id.tvAuthor);
-     findViewById(R.id.btnCheckUpdate).setOnClickListener(v ->
-        new UpdateChecker(this).check(false));
-     tvAuthor.setOnClickListener(v -> {
-     Intent intent = new Intent(Intent.ACTION_VIEW, 
-     android.net.Uri.parse("https://github.com/MikotoNetwork"));
-     startActivity(intent);
-});
+        btnToWeb = findViewById(R.id.btnToWeb);
+        btnToWeb.setOnClickListener(v -> {
+          Uri.parse("https://bilixia.misaknetwork.top/");
+        });
 
-findViewById(R.id.tvSource).setOnClickListener(v -> {
-    startActivity(new Intent(Intent.ACTION_VIEW,
-            Uri.parse("https://github.com/misaknetwork/BiliXia")));
-});
-
-
-     findViewById(R.id.tvWeb).setOnClickListener(v -> {
-    startActivity(new Intent(Intent.ACTION_VIEW,
-            Uri.parse("https://bilixia.misaknetwork.top/")));
-});
-
-
-        
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("关于");
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 显示返回箭头
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         
@@ -65,17 +42,28 @@ findViewById(R.id.tvSource).setOnClickListener(v -> {
                     .getPackageInfo(getPackageName(), 0).versionName;
             TextView tvVersion = findViewById(R.id.tvVersion);
             tvVersion.setText("版本 " + versionName);
+            tvVersion.setContentDescription("当前版本号 " + versionName);
         } catch (Exception ignored) {}
+
         
+        findViewById(R.id.tvAuthor).setOnClickListener(v -> {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://github.com/MikotoNetwork/BiliXia/")));
+        });
+
+        
+        Button btnCheckUpdate = findViewById(R.id.btnCheckUpdate);
+        btnCheckUpdate.setOnClickListener(v -> {
+            btnCheckUpdate.setEnabled(false);
+            btnCheckUpdate.announceForAccessibility("正在检查更新，请稍候");
+            new UpdateChecker(this).check(false);
+            btnCheckUpdate.postDelayed(() -> btnCheckUpdate.setEnabled(true), 2000);
+        });
     }
 
-    
     @Override
     public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
-    
-    
-    
 }
