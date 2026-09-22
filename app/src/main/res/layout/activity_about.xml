@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:minHeight="48dp"
-        android:text="检查更新" />
+        android:text="去官网" />
 
 
     
