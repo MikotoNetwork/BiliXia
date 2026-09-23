@@ -1,18 +1,9 @@
-# 混淆规则
--obfuscationdictionary bt-proguard.txt
--classobfuscationdictionary bt-proguard.txt
--packageobfuscationdictionary bt-proguard.txt
-
-# 跳过这些
-# ffmpeg相关
--keep class com.arthenica.ffmpegkit.** { *; }
- # smartexception
--keep class com.arthenica.smartexception.** { *; }
+# FFmpegKit（之前踩过 NoClassDefFoundError 的坑，保险起见保留）
 -keep class com.arthenica.** { *; }
--dontwarn com.arthenica.**
-# ffmpegkit
 -keep class dev.ffmpegkit.** { *; }
+-dontwarn com.arthenica.**
 -dontwarn dev.ffmpegkit.**
-# androidx
--keep class androidx.activity.result.** { *; }
--keep class top.misaknetwork.bilixia.** { *; }
+
+# Activity 由系统反射实例化，必须 keep
+-keep public class * extends android.app.Activity
+-keep public class * extends androidx.appcompat.app.AppCompatActivity
