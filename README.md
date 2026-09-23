@@ -15,20 +15,17 @@ B站侠是一个轻量的 Android 应用，用于把**独立的视频文件和�
 
 ## ✨ 功能特性
 
-- 🎞 **音视频合并** —— 把任意视频与音频轨道合并为 MP4
-- 🚀 **极速处理** —— 视频流直接 `copy`，不重新编码，速度极快
-- 📁 **独立输出目录** —— 结果保存到 `Android/data/top.misaknetwork.bilixia/files/Movies/BXia/`
-- 🕒 **时间戳命名** —— `B站侠_YYYYMMDD_HHMMSS.mp4`，永不覆盖
-- 📱 **相册自动扫描** —— 合并完成后可在相册中直接查看
-- 🔄 **内置自动更新** —— 基于 GitHub Releases 检查新版本
-- 🌙 **简洁界面** —— 三键操作：选视频 → 选音频 → 开始合并
+>- 🎞 **音视频合并** —— 把任意视频与音频轨道合并为 MP4
+>- 🚀 **极速处理** —— 视频流直接 `copy`，不重新编码，速度极快
+>- 📁 **独立输出目录** —— 结果保存到 `Android/data/top.misaknetwork.bilixia/files/Movies/BXia/`
+>- 🕒 **时间戳命名** —— `B站侠_YYYYMMDD_HHMMSS.mp4`，永不覆盖
+>- 📱 **相册自动扫描** —— 合并完成后可在相册中直接查看
+>- 🔄 **内置自动更新** —— 基于 GitHub Releases 检查新版本
+>- 🌙 **简洁界面** —— 三键操作：选视频 → 选音频 → 开始合并
 
 ---
 
 ## 📸 截图
-
-> 待补充
-
 | 主界面 | 合并中 | 关于页面 |
 | :---: | :---: | :---: |
 | ![主界面](docs/screenshots/main.png) | ![合并中](docs/screenshots/merging.png) | ![关于](docs/screenshots/about.png) |
