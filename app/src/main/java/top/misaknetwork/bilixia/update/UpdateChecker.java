@@ -17,10 +17,14 @@
  */
 package top.misaknetwork.bilixia.update;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
@@ -38,15 +42,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
-/**
-* 用于检查更新的类
-*
-*/
+
 public class UpdateChecker {
 
     private static final String TAG = "UpdateChecker";
@@ -55,26 +57,27 @@ public class UpdateChecker {
     private static final String LATEST_API =
             "https://api.github.com/repos/" + OWNER + "/" + REPO + "/releases/latest";
 
-    private final Context ctx;
+    private final Context ctx;                        
+    private final WeakReference<Activity> activityRef; 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final Handler main = new Handler(Looper.getMainLooper());
     private final AtomicBoolean running = new AtomicBoolean(false);
 
-    public UpdateChecker(Context ctx) {
-        this.ctx = ctx.getApplicationContext();
+    public UpdateChecker(Activity activity) {
+        this.activityRef = new WeakReference<>(activity);
+        this.ctx = activity.getApplicationContext();
     }
 
-    
     public void check(boolean silentIfNoUpdate) {
         if (!running.compareAndSet(false, true)) return;
         executor.execute(() -> {
             try {
                 doCheck(silentIfNoUpdate);
-            } catch (Exception e) {
-                Log.e(TAG, "检查更新失败", e);
+            } catch (Throwable t) {
+                Log.e(TAG, "检查更新失败", t);
                 if (!silentIfNoUpdate) {
                     main.post(() -> Toast.makeText(ctx,
-                            "检查更新失败：" + e.getMessage(),
+                            "检查更新失败：" + t.getMessage(),
                             Toast.LENGTH_LONG).show());
                 }
             } finally {
@@ -84,6 +87,15 @@ public class UpdateChecker {
     }
 
     private void doCheck(boolean silentIfNoUpdate) throws Exception {
+        if (!isNetworkAvailable()) {
+            Log.d(TAG, "无网络，跳过更新检查");
+            if (!silentIfNoUpdate) {
+                main.post(() -> Toast.makeText(ctx,
+                        "无网络连接", Toast.LENGTH_SHORT).show());
+            }
+            return;
+        }
+
         HttpURLConnection conn = null;
         try {
             conn = (HttpURLConnection) new URL(LATEST_API).openConnection();
@@ -166,7 +178,13 @@ public class UpdateChecker {
     }
 
     private void showUpdateDialog(String version, String changelog, String url) {
-        new AlertDialog.Builder(ctx)
+        Activity activity = activityRef.get();
+        if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
+            Log.w(TAG, "Activity 已不可用，跳过弹窗");
+            return;
+        }
+
+        new AlertDialog.Builder(activity)          // ★ 用 Activity，不是 ctx
                 .setTitle("发现新版本 v" + version)
                 .setMessage(changelog.isEmpty() ? "是否下载并安装？" : changelog)
                 .setPositiveButton("下载并安装", (d, w) -> downloadAndInstall(url))
@@ -180,7 +198,10 @@ public class UpdateChecker {
         final File apkFile = new File(dir, "update.apk");
         if (apkFile.exists()) apkFile.delete();
 
-        ProgressDialog pd = new ProgressDialog(ctx);
+        Activity activity = activityRef.get();
+        if (activity == null || activity.isFinishing() || activity.isDestroyed()) return;
+
+        ProgressDialog pd = new ProgressDialog(activity);   // ★ 同样用 Activity
         pd.setMessage("正在下载…");
         pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         pd.setCancelable(false);
@@ -213,11 +234,11 @@ public class UpdateChecker {
                     pd.dismiss();
                     installApk(apkFile);
                 });
-            } catch (Exception e) {
-                Log.e(TAG, "下载失败", e);
+            } catch (Throwable t) {
+                Log.e(TAG, "下载失败", t);
                 main.post(() -> {
                     pd.dismiss();
-                    Toast.makeText(ctx, "下载失败：" + e.getMessage(),
+                    Toast.makeText(ctx, "下载失败：" + t.getMessage(),
                             Toast.LENGTH_LONG).show();
                 });
             } finally {
@@ -241,5 +262,21 @@ public class UpdateChecker {
 
         intent.setDataAndType(uri, "application/vnd.android.package-archive");
         ctx.startActivity(intent);
+    }
+
+    private boolean isNetworkAvailable() {
+        try {
+            ConnectivityManager cm = (ConnectivityManager)
+                    ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (cm == null) return false;
+
+            Network network = cm.getActiveNetwork();
+            if (network == null) return false;
+            NetworkCapabilities caps = cm.getNetworkCapabilities(network);
+            return caps != null && caps.hasCapability(
+                    NetworkCapabilities.NET_CAPABILITY_INTERNET);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
