@@ -41,6 +41,9 @@ android {
              enableV2Signing true
             // 明确开启APK V3签名
               enableV3Signing true
+              // 明确开启APK V4签名
+              enableV4Signing true
+             
             
             
         }
@@ -51,6 +54,8 @@ android {
          enableV2Signing true
          // 明确开启APK V3签名
          enableV3Signing true
+         // 明确开启APK V4签名
+         enableV4Signing true
         }
     }
 
