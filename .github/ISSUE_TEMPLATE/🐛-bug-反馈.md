@@ -2,7 +2,7 @@
 name: "\U0001F41B Bug 反馈"
 about: 提交一个 Bug 帮助 B站侠变得更好
 title: '你遇到问题的简短描述作为标题'
-labels: ''
+labels: ' bug'
 assignees: ''
 
 ---
