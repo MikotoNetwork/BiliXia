@@ -8,10 +8,10 @@ android {
 
     defaultConfig {
         applicationId "top.misaknetwork.bilixia"
-        minSdk 26
+        minSdk 29
         targetSdk 34
         versionCode 12
-        versionName "1.12.0"
+        versionName "1.13.0"
         
         ndk {
             abiFilters 'arm64-v8a'
