@@ -64,5 +64,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.activity:activity:1.8.2'
-    implementation 'dev.ffmpegkit-maintained:ffmpeg-kit-full:8.1.7'
+    // 改成最新的 8.1.9
+    implementation 'dev.ffmpegkit-maintained:ffmpeg-kit-full:8.1.9'
 }
