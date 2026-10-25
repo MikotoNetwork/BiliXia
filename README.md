@@ -7,7 +7,7 @@
 [![CI](https://github.com/MikotoNetwork/BiliXia/actions/workflows/CI.yml/badge.svg)](https://github.com/MikotoNetwork/BiliXia/actions/workflows/CI.yml)<br>
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)<br>
 [![Platform](https://img.shields.io/badge/Platform-Android-green.svg)](https://www.android.com/)<br>
-[![Min SDK](https://img.shields.io/badge/Min%20SDK-26-orange.svg)](https://developer.android.com/)
+[![Min SDK](https://img.shields.io/badge/Min%20SDK-29-orange.svg)](https://developer.android.com/)
 
 B站侠是一个轻量的 Android 应用，用于把**独立的视频文件和音频文件**合并成一个完整的 MP4。所有处理都在本地完成，**不上传任何文件到服务器**，保护你的隐私。
 
@@ -52,8 +52,7 @@ B站侠是一个轻量的 Android 应用，用于把**独立的视频文件和�
 5. 合并完成后，视频会自动出现在相册中；也可以从文件管理器进入：
 ```
 
-Android/data/top.misaknetwork.bilixia/files/Movies/BXia/
-
+/storage/emulated/0/Movies/BiliXia
 ```
 
 ---
