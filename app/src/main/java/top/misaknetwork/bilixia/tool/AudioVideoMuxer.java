@@ -201,7 +201,7 @@ public class AudioVideoMuxer {
     /** ffmpeg statistics 回调（内部线程） */
     private void onStatistics(Statistics statistics, long durationMs, Callback callback) {
         if (released || cancelRequested || durationMs <= 0) return;
-        long time = statistics.getTime(); // 已处理时长（毫秒）
+        long time = (long) statistics.getTime(); // 已处理时长（毫秒）
         int p = (int) (time * 100 / durationMs);
         p = Math.max(0, Math.min(99, p));  // 100% 留给 onSuccess
         final int percent = p;

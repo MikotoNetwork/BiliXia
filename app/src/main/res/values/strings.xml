@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">B站侠</string>
+    <!-- 文件标签 -->
+<string name="label_video">视频: %1$s</string>
+<string name="label_audio">音频: %1$s</string>
+<string name="unknown_file">未知文件</string>
+
+<!-- 状态 -->
+<string name="status_prepare">准备中…</string>
+<string name="status_merging">处理中… %1$d%%</string>
+<string name="status_saving">正在保存到相册…</string>
+<string name="status_success">已保存到相册：%1$s\n（点击此处可分享）</string>
+<string name="status_error">%1$s</string>
+
+<!-- 读屏播报 -->
+<string name="announce_start">开始合并</string>
+<string name="announce_progress">合并进度 %1$d%%</string>
+<string name="announce_saving">正在保存到相册</string>
+<string name="announce_done">合并完成，已保存到相册</string>
+<string name="announce_fail">合并失败：%1$s</string>
+
+<!-- Toast -->
+<string name="toast_pick_both">请先选择视频和音频</string>
+<string name="toast_dir_failed">无法创建临时目录</string>
+<string name="toast_done">已保存到相册</string>
+<string name="toast_fail">合并失败</string>
+<string name="toast_merge_start_failed">启动合并失败：%1$s</string>
+<string name="toast_permission_failed">无法获取文件读取权限，请重新选择</string>
+<string name="toast_merging">正在合并，请稍候</string>
+<string name="toast_save_failed">保存到相册失败：%1$s</string>
+
+<!-- 分享 -->
+<string name="share_via">分享视频</string>
+<string name="share_failed">分享失败</string>
 
 </resources>
